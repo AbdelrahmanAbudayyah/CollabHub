@@ -1,0 +1,27 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backend
+backend/target/
+backend/*.jar
+backend/uploads/
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+#claude
+claude/
+.md
