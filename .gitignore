@@ -22,6 +22,6 @@ frontend/out/
 .env.local
 .env.*.local
 
+
 #claude
 claude/
-.md
