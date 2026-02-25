@@ -77,31 +77,6 @@ npm run dev
 
 The app starts at `http://localhost:3000`.
 
-## API Overview
-
-All endpoints are prefixed with `/api/v1`. Authenticated endpoints require `Authorization: Bearer <token>`.
-
-| Area | Endpoints |
-|------|-----------|
-| **Auth** | `POST /auth/register`, `/auth/login`, `/auth/refresh`, `/auth/logout` |
-| **Users** | `GET /users/me`, `PUT /users/me`, `PUT /users/me/skills`, `POST /users/me/profile-pic`, `GET /users/{id}` |
-| **Projects** | `POST /projects`, `GET /projects`, `GET /projects/{id}`, `PUT /projects/{id}`, `DELETE /projects/{id}` |
-| **Members** | `GET /projects/{id}/members`, `POST /projects/{id}/join-requests`, `PUT /projects/{id}/join-requests/{reqId}` |
-| **Bookmarks** | `POST /projects/{id}/interest`, `DELETE /projects/{id}/interest` |
-| **Notifications** | `GET /notifications`, `GET /notifications/unread-count`, `PUT /notifications/{id}/read` |
-| **Skills** | `GET /skills` |
-
-All responses use a uniform envelope:
-
-```json
-{
-  "status": "success",
-  "data": { ... },
-  "message": "Optional message",
-  "timestamp": "2025-01-01T00:00:00Z"
-}
-```
-
 ## Auth Strategy
 
 - **Access token** — JWT (HS384), 15-minute expiry, stored in memory (not localStorage)
