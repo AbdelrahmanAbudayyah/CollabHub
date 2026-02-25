@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/context/AuthContext";
 import { User } from "lucide-react";
+import NotificationBell from "./NotificationBell";
 
 export default function Navbar() {
   const { user, isAuthenticated, isLoading, logout } = useAuth();
@@ -22,13 +23,21 @@ export default function Navbar() {
           CollabHub
         </Link>
         <div className="flex items-center gap-3">
+          {/* Browse Projects link — visible to everyone (public page) */}
+          <Button variant="ghost" asChild>
+            <Link href="/projects">Browse</Link>
+          </Button>
           {isLoading ? (
             <div className="h-9 w-20 animate-pulse rounded-md bg-muted" />
           ) : isAuthenticated ? (
             <>
               <Button variant="ghost" asChild>
+                <Link href="/projects/create">Create Project</Link>
+              </Button>
+              <Button variant="ghost" asChild>
                 <Link href="/dashboard">Dashboard</Link>
               </Button>
+              <NotificationBell />
               {/*
                 Clickable avatar + name linking to /profile.
                 Shows profile pic if available, otherwise a

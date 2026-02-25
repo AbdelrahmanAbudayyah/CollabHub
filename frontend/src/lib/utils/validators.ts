@@ -102,3 +102,53 @@ export const profileSchema = z.object({
  * they can never get out of sync.
  */
 export type ProfileFormData = z.infer<typeof profileSchema>;
+
+/**
+ * Project creation wizard — Step 1 (Basics) validation.
+ *
+ * maxTeamSize uses z.number() because the input field will use
+ * React Hook Form's { valueAsNumber: true } option, which converts
+ * the HTML input string to a number before Zod sees it.
+ * Without valueAsNumber, z.number() would fail because HTML inputs
+ * always produce strings.
+ */
+export const projectBasicsSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Title is required")
+    .max(200, "Title must not exceed 200 characters"),
+  description: z
+    .string()
+    .min(1, "Description is required")
+    .max(5000, "Description must not exceed 5000 characters"),
+  maxTeamSize: z
+    .number({ error: "Team size must be a number" })
+    .int("Team size must be a whole number")
+    .min(2, "Team size must be at least 2")
+    .max(20, "Team size must not exceed 20"),
+  githubUrl: z
+    .string()
+    .regex(/^https?:\/\/.+/, "Must be a valid URL")
+    .optional()
+    .or(z.literal("")),
+});
+
+export type ProjectBasicsFormData = z.infer<typeof projectBasicsSchema>;
+
+/**
+ * Project creation wizard — Step 3 (Tasks) individual task validation.
+ * Each task in the dynamic list is validated with this schema.
+ */
+export const taskSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Task title is required")
+    .max(200, "Task title must not exceed 200 characters"),
+  description: z
+    .string()
+    .max(2000, "Task description must not exceed 2000 characters")
+    .optional()
+    .or(z.literal("")),
+});
+
+export type TaskFormData = z.infer<typeof taskSchema>;
